@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="tBYvX2xzh4JVv8nWct_T" name="Page-1">
-        <mxGraphModel dx="761" dy="557" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+        <mxGraphModel dx="1145" dy="773" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -25,7 +25,7 @@
                         <mxPoint x="723" y="365" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="DQ16eLSjtrJbzWLSPgBY-10" value="&lt;div&gt;{&lt;/div&gt;&lt;div&gt;&amp;nbsp; &quot;tag&quot;: &quot;sim000001&quot;,&lt;/div&gt;&lt;div&gt;&amp;nbsp; &quot;ts&quot;: &quot;2023-01-13T10:10:11.5091350Z&quot;,&lt;/div&gt;&lt;div&gt;&amp;nbsp; &quot;value&quot;: 0.207759137669466&lt;/div&gt;&lt;div&gt;}&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+                <mxCell id="DQ16eLSjtrJbzWLSPgBY-10" value="&lt;div&gt;{&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&amp;nbsp; &quot;ts&quot;: &quot;2023-01-13T10:10:11.5091350Z&quot;,&lt;/span&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&amp;nbsp; &quot;tag_abc&quot;: 0.207759137669466&lt;/div&gt;&lt;div&gt;}&lt;/div&gt;&lt;div&gt;...&lt;/div&gt;&lt;div&gt;&lt;div style=&quot;border-color: var(--border-color);&quot;&gt;{&lt;/div&gt;&lt;div style=&quot;border-color: var(--border-color);&quot;&gt;&lt;span style=&quot;border-color: var(--border-color); background-color: initial;&quot;&gt;&amp;nbsp; &quot;ts&quot;: &quot;2023-01-13T10:10:11.5091451Z&quot;,&lt;/span&gt;&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;&lt;/div&gt;&lt;div style=&quot;border-color: var(--border-color);&quot;&gt;&amp;nbsp; &quot;tag_xyz&quot;: 0.186638148445431&lt;/div&gt;&lt;div style=&quot;border-color: var(--border-color);&quot;&gt;}&lt;/div&gt;&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
                     <mxGeometry x="82" y="168" width="320" height="100" as="geometry"/>
                 </mxCell>
                 <mxCell id="4" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://raw.githubusercontent.com/influxdata/telegraf/master/assets/TelegrafTiger.png;" parent="1" vertex="1">

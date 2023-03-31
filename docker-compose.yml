@@ -29,11 +29,10 @@ services:
     environment:
       KafkaConnectionProperties: '{"bootstrap.servers": "kafka:9092"}'
       KafkaTopic: ${KAFKA_TOPIC} #Topic will be created with default settings if it doesn't exist
-      DeviceCount: 3
       MessageCount: 0 # send unlimited
-      DevicePrefix: tag
-      Template: '{"${SIMULATOR_TAG_KEY}": "$.DeviceId", "${SIMULATOR_TIME_KEY}": "$.Time", "value": $.Value}'
-      Variables: '[{"name": "Value", "randomDouble":true, "min":0.22, "max":1.25}]'
+      DeviceList: "tag_abc,tag_xyz"
+      Template: '{"${SIMULATOR_TIME_KEY}": "$.Time", "$.DeviceId": $.Value}'
+      Variables: '[ {"name": "Value", "randomDouble": true, "min": 0.22, "max": 1.25} ]'
   influxdb:
     image: influxdb:2.6
     hostname: influxdb
@@ -60,5 +59,4 @@ services:
       INFLUXDB_TOKEN: ${INFLUXDB_TOKEN}
       INFLUXDB_ORG: ${INFLUXDB_ORG}
       INFLUXDB_BUCKET: ${INFLUXDB_BUCKET}
-      SIMULATOR_TAG_KEY: ${SIMULATOR_TAG_KEY}
       SIMULATOR_TIME_KEY: ${SIMULATOR_TIME_KEY}
