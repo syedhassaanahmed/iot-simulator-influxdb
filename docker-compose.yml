@@ -1,0 +1,64 @@
+version: "3.8"
+services:
+  zookeeper:
+    image: confluentinc/cp-zookeeper
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_LOG4J_ROOT_LOGLEVEL: ERROR
+      ZOOKEEPER_TOOLS_LOG4J_LOGLEVEL: ERROR
+  kafka:
+    image: confluentinc/cp-kafka
+    hostname: kafka
+    ports:
+      - 29092:29092
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_LOG4J_ROOT_LOGLEVEL: ERROR
+      KAFKA_TOOLS_LOG4J_LOGLEVEL: ERROR
+  iot-telemetry-simulator:
+    image: mcr.microsoft.com/oss/azure-samples/azureiot-telemetrysimulator
+    depends_on:
+      - kafka
+    environment:
+      KafkaConnectionProperties: '{"bootstrap.servers": "kafka:9092"}'
+      KafkaTopic: ${KAFKA_TOPIC} #Topic will be created with default settings if it doesn't exist
+      DeviceCount: 3
+      MessageCount: 0 # send unlimited
+      DevicePrefix: tag
+      Template: '{"${SIMULATOR_TAG_KEY}": "$.DeviceId", "${SIMULATOR_TIME_KEY}": "$.Time", "value": $.Value}'
+      Variables: '[{"name": "Value", "randomDouble":true, "min":0.22, "max":1.25}]'
+  influxdb:
+    image: influxdb:2.6
+    hostname: influxdb
+    ports:
+      - 8086:8086
+    environment:
+      DOCKER_INFLUXDB_INIT_MODE: setup
+      DOCKER_INFLUXDB_INIT_USERNAME: ${INFLUXDB_USERNAME}
+      DOCKER_INFLUXDB_INIT_PASSWORD: ${INFLUXDB_PASSWORD}
+      DOCKER_INFLUXDB_INIT_ORG: ${INFLUXDB_ORG}
+      DOCKER_INFLUXDB_INIT_BUCKET: ${INFLUXDB_BUCKET}
+      DOCKER_INFLUXDB_INIT_ADMIN_TOKEN: ${INFLUXDB_TOKEN}
+  telegraf:
+    image: telegraf:1.26
+    depends_on:
+      - iot-telemetry-simulator
+      - influxdb
+    volumes:
+      - ./telegraf.conf:/etc/telegraf/telegraf.conf:ro
+    environment:
+      KAFKA_HOST: kafka
+      KAFKA_TOPIC: ${KAFKA_TOPIC}
+      INFLUXDB_HOST: influxdb
+      INFLUXDB_TOKEN: ${INFLUXDB_TOKEN}
+      INFLUXDB_ORG: ${INFLUXDB_ORG}
+      INFLUXDB_BUCKET: ${INFLUXDB_BUCKET}
+      SIMULATOR_TAG_KEY: ${SIMULATOR_TAG_KEY}
+      SIMULATOR_TIME_KEY: ${SIMULATOR_TIME_KEY}
