@@ -1,0 +1,25 @@
+{
+    "image": "mcr.microsoft.com/devcontainers/base:debian",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "GitHub.codespaces",
+                "github.vscode-github-actions",
+                "hediet.vscode-drawio",
+                "influxdata.flux",
+                "ms-azuretools.vscode-docker",
+                "timonwong.shellcheck"
+            ]
+        },
+        "codespaces": {
+            "repositories": {
+                "devcontainers/features": {
+                    "permissions": "write-all"
+                }
+            }
+        }
+    },
+    "features": {
+        "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+    }
+}

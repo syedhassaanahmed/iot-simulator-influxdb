@@ -1,0 +1,24 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    paths-ignore:
+      - 'README.md'
+      - 'docs/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Build Dev Container and Run Smoke Test
+      uses: devcontainers/ci@v0.3
+      with:
+        cacheFrom: mcr.microsoft.com/devcontainers/base:debian
+        push: never
+        runCmd: ./smoke-test.sh
